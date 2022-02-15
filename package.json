@@ -1,0 +1,54 @@
+{
+  "name": "mytestextension",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint .",
+    "eslint-plugin-react": "^7.28.0",
+    "lint-staged": "^12.3.3",
+    "prettier": "^2.5.1",
+    "pre-commit": "lint-staged",
+    "postinstall": "husky install && cd app && yarn install"
+  },
+  "dependencies": {
+    "react": "17.0.2",
+    "react-native": "0.67.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(js|jsx)": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
+    "*.+(json|css|md)": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "husky": "^7.0.4",
+    "jest": "^26.6.3",
+    "lint-staged": "^12.3.4",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "prettier": "^2.5.1",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
