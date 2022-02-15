@@ -28,7 +28,8 @@ import {
 
 const Section = ({ children, title }): Node => {
   const isDarkMode = useColorScheme() === "dark"
-  falsd
+  falsddsa
+  sadasda
   return (
     <View style={styles.sectionContainer}>
       <Text
