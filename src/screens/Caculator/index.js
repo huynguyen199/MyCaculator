@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-eval */
-import { View, Text, Animated, TouchableOpacity } from "react-native"
+import { View, Text, Animated, TouchableOpacity, StyleSheet } from "react-native"
 import React, { useState, useRef } from "react"
 import ContainerButton from "../../Components/ContainerButton"
 import { checkOperation } from "./Method"
@@ -9,10 +9,9 @@ const CacuLatorScreen = () => {
   const [result, setResult] = useState("0")
   const resultAbove = useRef(new Animated.Value(0)).current
   const resultFontAbove = useRef(new Animated.Value(60)).current
-
   const resultBellow = useState(new Animated.Value(35))[0]
 
-  function AnimationFontResultAbove() {
+  function animationResultFontAbove() {
     Animated.timing(resultAbove, {
       toValue: 20,
       duration: 600,
@@ -27,7 +26,7 @@ const CacuLatorScreen = () => {
   }
 
   function setAnimation() {
-    AnimationFontResultAbove()
+    animationResultFontAbove()
     Animated.timing(resultFontAbove, {
       toValue: 40,
       duration: 80,
@@ -52,18 +51,14 @@ const CacuLatorScreen = () => {
         return
       }
       const value = result.replace(result[0], "")
-      console.log(
-        "DEBUG: - file: index.js - line 25 - changePositive - value",
-        value
-      )
       setResult(value)
     }
   }
 
-  function ClearResult() {
+  function clearResult() {
     setResult("0")
   }
-  function CalculateResult() {
+  function calculateResult() {
     try {
       setAnimation()
       console.log("call")
@@ -76,18 +71,13 @@ const CacuLatorScreen = () => {
 
       if (index != -1) {
         let replaceResult
-        const Operation = result.charAt(index)
-        if (Operation == "÷") {
+        const operation = result.charAt(index)
+        if (operation == "÷") {
           replaceResult = result.replace(result.charAt(index), "/")
         }
-        if (Operation == "×") {
+        if (operation == "×") {
           replaceResult = result.replace(result.charAt(index), "*")
         }
-
-        console.log(
-          "DEBUG: - file: index.js - line 26 - CalculateResult - replaceResult",
-          replaceResult
-        )
 
         const calculate = eval(replaceResult)
         console.log("caculator", calculate)
@@ -98,34 +88,25 @@ const CacuLatorScreen = () => {
         setResult(calculate)
       }
     } catch (e) {
-      console.log("result", result)
       setResult(result)
     }
   }
-  const Caculator = {
+  const caculator = {
     changeResult,
-    ClearResult,
-    CalculateResult,
+    clearResult,
+    calculateResult,
     changeOperation,
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "red" }}>
-      <View
-        style={{
-          flex: 0.318,
-          backgroundColor: "black",
-          alignItems: "flex-end",
-          justifyContent: "flex-end",
-        }}
-      >
+    <View style={styles.container}>
+      <View style={styles.boxUpperHalf}>
         <Animated.Text
           style={{
             fontWeight: "bold",
             fontSize: resultFontAbove,
             marginStart: resultAbove,
             color: "white",
-            backgroundColor: "blue",
           }}
         >
           {result}
@@ -135,7 +116,6 @@ const CacuLatorScreen = () => {
             fontWeight: "bold",
             fontSize: resultBellow,
             color: "white",
-            backgroundColor: "red",
           }}
         >
           {"0"}
@@ -143,11 +123,23 @@ const CacuLatorScreen = () => {
       </View>
       {/* container for button calculator */}
       <TouchableOpacity onPress={setAnimation}>
-        <Text>dsasd</Text>
+        <Text>test animation</Text>
       </TouchableOpacity>
-      <ContainerButton Caculator={Caculator} />
+      <ContainerButton caculator={caculator} />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  boxUpperHalf: {
+    flex: 0.318,
+    backgroundColor: "black",
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+  },
+})
 
 export default CacuLatorScreen
