@@ -18,7 +18,7 @@ const ContainerButton = ({ caculator }) => {
         }}
       >
         <ButtonCaculator
-          onPress={caculator.ClearResult}
+          onPress={caculator.clearResult}
           value={"AC"}
           style={{ backgroundColor: "#4D4846", borderColor: "black" }}
           textColor={"white"}
@@ -149,7 +149,7 @@ const ContainerButton = ({ caculator }) => {
           style={{ backgroundColor: "pink" }}
         />
         <ButtonCaculator
-          onPress={() => caculator.CalculateResult()}
+          onPress={() => caculator.calculateResult()}
           value={"="}
           style={{ backgroundColor: "yellow" }}
         />
